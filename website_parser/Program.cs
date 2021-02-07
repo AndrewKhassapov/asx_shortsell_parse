@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Net.Http;
 using System.Collections.Generic;
 using System.IO;
@@ -74,10 +74,10 @@ namespace website_parser
         public Data(string line)
         {
             matches = ParseInput(line);
-            ticker = ReadStringAtIndex(line, 0);
-            percentShorted = ReadDoubleAtIndex(line, -1);
-            volume = ReadDoubleAtIndex(line, -3);
-            capital = ReadDoubleAtIndex(line, -2);
+            ticker = ReadStringAtIndex(0);
+            percentShorted = ReadDoubleAtIndex(-1);
+            volume = ReadDoubleAtIndex(-3);
+            capital = ReadDoubleAtIndex(-2);
         }
 
         protected MatchCollection ParseInput(string line) {
@@ -86,7 +86,7 @@ namespace website_parser
             return Regex.Matches(line, regex, RegexOptions.ECMAScript);
         }
 
-        protected string ReadStringAtIndex(string line, int index)
+        protected string ReadStringAtIndex(int index)
         {
             if(index < 0)
             {
@@ -100,7 +100,7 @@ namespace website_parser
             return ("No matches at line " + index.ToString());
         }
 
-        protected double ReadDoubleAtIndex(string line, int index)
+        protected double ReadDoubleAtIndex(int index)
         {
             double parsedString = 0.0;
 
@@ -133,10 +133,12 @@ namespace website_parser
 
         public int CompareTo(Data obj)
         {
-            if(obj != null)
+            if(obj != null){
                 return this.percentShorted.CompareTo(obj.percentShorted);
-            else
+            }
+            else{
                 throw new ArgumentException("Object is not a " + obj.GetType());
+            }
         }
 
         ///<summary>Prints data information as string</sumamry>
