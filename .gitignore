@@ -1,0 +1,4 @@
+/.vs
+/website_parser/.gitattributes
+/website_parser/bin
+/website_parser/obj
